@@ -2,8 +2,8 @@ module "vpc" {
   source = "./modules/vpc"
 
   vpc_cidr           = var.vpc_cidr
-  pub_sub_cidr       = var.pub_sub_cidr
-  pri_sub_cidr       = var.pri_sub_cidr
+  public_subnet_cidr       = var.public_subnet_cidr
+  private_subnet_cidr       = var.private_subnet_cidr
   create_nat_gateway = var.create_nat_gateway
 }
 
@@ -46,10 +46,10 @@ module "ecs" {
 
 
 module "database" {
-  source = "./modules/database"
+  source = "./modules/RDS"
 
   vpc_id            = module.vpc.vpc_output
-  public_subnets   = module.vpc.public_subnets
+  private_subnets = module.vpc.private_subnets
   backend_sg_id     = module.sg.sg_id
 
   db_name           = var.db_name

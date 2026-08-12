@@ -5,13 +5,13 @@ on:
     branches:
       - main
     paths:
-      - 'backend/**'
+      - 'backend-service/**'
 
 env:
-  AWS_REGION: us-west-2
-  ECR_REPOSITORY: backend-application
-  ECS_CLUSTER: application-cluster
-  ECS_SERVICE: backend-service
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: backend-service
+  ECS_CLUSTER: backend-cluster
+  ECS_SERVICE: backend-svc
 
 jobs:
   deploy:

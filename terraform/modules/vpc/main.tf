@@ -7,19 +7,19 @@ data "aws_availability_zones" "azs" {}
 
 
 resource "aws_subnet" "public" {
-  count = length(var.pub_sub_cidr)
+  count = length(var.public_subnet_cidr)
 
   vpc_id                  = aws_vpc.app_vpc.id
-  cidr_block              = var.pub_sub_cidr[count.index]
+  cidr_block              = var.public_subnet_cidr[count.index]
   availability_zone       = data.aws_availability_zones.azs.names[count.index]
   map_public_ip_on_launch = true
 }
 
 resource "aws_subnet" "private" {
-  count = length(var.pri_sub_cidr)
+  count = length(var.private_subnet_cidr)
 
   vpc_id            = aws_vpc.app_vpc.id
-  cidr_block        = var.pri_sub_cidr[count.index]
+  cidr_block        = var.private_subnet_cidr[count.index]
   availability_zone = data.aws_availability_zones.azs.names[count.index]
 }
 

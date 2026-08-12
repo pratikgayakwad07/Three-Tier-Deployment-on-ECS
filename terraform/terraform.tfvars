@@ -1,19 +1,22 @@
-aws_region = "us-west-2"
+aws_region = "us-east-1"
 
+environment = "dev"
+
+project_name = "blog-app"
 
 # VPC
 vpc_cidr = "10.0.0.0/16"
 
-pub_sub_cidr = [
+public_subnet_cidr = [
   "10.0.1.0/24",
   "10.0.2.0/24"
 ]
 
-pri_sub_cidr = [
+private_subnet_cidr = [
   "10.0.3.0/24",
   "10.0.4.0/24"
 ]
-
+# NAT Gateway
 create_nat_gateway = true
 
 
@@ -22,11 +25,11 @@ container_port = 5003
 
 
 # ECR
-repository_name = "backend-application"
+repository_name = "backend-service"
 
 
 # Frontend
-bucket_name = "simple-blog-app-frontend"
+bucket_name = "UI-service-bucket"
 
 
 # ASG

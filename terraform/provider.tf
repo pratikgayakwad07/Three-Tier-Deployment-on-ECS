@@ -1,15 +1,16 @@
 provider "aws" {
-    region = var.aws_region
-}
+  region = var.aws_region
 
-
-
-terraform {
-  backend "s3" {
-    bucket         = "bucket-remote-tfstate-simple-blog-app"
-    key            = "amazona-app/terraform.tfstate"
-    region         = "us-west-2"
-    use_lockfile   =  true
+  default_tags {
+    tags = {
+      Project     = var.project_name
+      Environment = var.environment
+      managed_by  = "Terraform"
+      Owner       = "DevOps"
+    }
   }
 }
+
+
+
 

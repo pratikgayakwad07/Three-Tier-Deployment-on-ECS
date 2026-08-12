@@ -3,6 +3,15 @@ variable "aws_region" {
   type        = string
 }
 
+variable "project_name" {
+  description = "Project name"
+  type        = string
+}
+
+variable "environment" {
+  description = "Environment name"
+  type        = string
+}
 
 variable "vpc_cidr" {
   description = "CIDR block for the VPC"
@@ -10,13 +19,13 @@ variable "vpc_cidr" {
 }
 
 
-variable "pub_sub_cidr" {
+variable "public_subnet_cidr" {
   description = "CIDR blocks for public subnets"
   type        = list(string)
 }
 
 
-variable "pri_sub_cidr" {
+variable "private_subnet_cidr" {
   description = "CIDR blocks for private subnets"
   type        = list(string)
 }

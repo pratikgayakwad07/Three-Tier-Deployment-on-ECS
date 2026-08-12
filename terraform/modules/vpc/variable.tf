@@ -2,11 +2,11 @@ variable "vpc_cidr" {
   type = string
 }
 
-variable "pub_sub_cidr" {
+variable "public_subnet_cidr" {
   type = list(string)
 }
 
-variable "pri_sub_cidr" {
+variable "private_subnet_cidr" {
   type = list(string)
 }
 
