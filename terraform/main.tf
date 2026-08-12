@@ -48,12 +48,13 @@ module "ecs" {
 module "database" {
   source = "./modules/RDS"
 
+  environment = var.environment
   vpc_id            = module.vpc.vpc_output
   private_subnets = module.vpc.private_subnets
   backend_sg_id     = module.sg.sg_id
 
   db_name           = var.db_name
-  username          = var.db_username
+  db_username       = var.db_username
   engine_version    = var.engine_version
   instance_class    = var.instance_class
   allocated_storage = var.allocated_storage

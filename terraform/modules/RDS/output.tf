@@ -10,6 +10,10 @@ output "db_name" {
   value = aws_db_instance.mysql.db_name
 }
 
+output "db_username" {
+  value = aws_db_instance.mysql.username
+}
+
 output "db_instance_id" {
   value = aws_db_instance.mysql.id
 }
