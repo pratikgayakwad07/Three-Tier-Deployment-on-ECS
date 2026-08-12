@@ -32,7 +32,7 @@ module "mysql" {
   max_allocated_storage = var.max_allocated_storage
 
   db_name = var.db_name
-  db_username = var.db_username
+  username = var.db_username
   port = 3306
 
   manage_master_user_password = true
