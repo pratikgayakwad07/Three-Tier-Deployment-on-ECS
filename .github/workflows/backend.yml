@@ -10,8 +10,8 @@ on:
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: backend-service
-  ECS_CLUSTER: backend-cluster
-  ECS_SERVICE: backend-svc
+  ECS_CLUSTER: dev-cluster
+  ECS_SERVICE: dev-svc
 
 jobs:
   deploy:

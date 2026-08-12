@@ -29,7 +29,7 @@ repository_name = "backend-service"
 
 
 # Frontend
-bucket_name = "UI-service-bucket"
+bucket_name = "UI-service-bucket-01"
 
 
 # ASG

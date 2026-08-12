@@ -9,3 +9,5 @@ variable "public_subnets" {
 variable "container_port" {
   type = number
 }
+
+variable "environment"{}

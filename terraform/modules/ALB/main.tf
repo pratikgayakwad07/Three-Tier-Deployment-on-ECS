@@ -1,5 +1,27 @@
+resource "aws_security_group" "alb_sg" {
+  name   = "alb-sg"
+  vpc_id = var.vpc_id
+
+  
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+}
+
+## Create Application Load Balancer
 resource "aws_lb" "app_alb" {
-  name               = "app-alb"
+  name               = "${var.environment}-alb"
   load_balancer_type = "application"
   internal           = false
 
@@ -8,7 +30,7 @@ resource "aws_lb" "app_alb" {
 
 }
 
-
+## Create Target Group for ALB
 resource "aws_lb_target_group" "app_tg" {
   name     = "app-tg"
   port     = var.container_port

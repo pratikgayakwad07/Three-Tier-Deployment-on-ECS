@@ -21,3 +21,5 @@ variable "db_host" {
 variable "db_name" {
   type = string
 }
+
+variable "environment" {}

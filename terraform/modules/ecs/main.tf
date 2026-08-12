@@ -1,5 +1,5 @@
 resource "aws_ecs_cluster" "application_cluster" {
-  name = "backend-cluster"
+  name = "${var.environment}-cluster"
 }
 
 
@@ -59,7 +59,7 @@ resource "aws_ecs_task_definition" "task_def" {
 
 
 resource "aws_ecs_service" "service" {
-  name            = "backend-svc"
+  name            = "${var.environment}-svc"
   cluster         = aws_ecs_cluster.application_cluster.id
   task_definition = aws_ecs_task_definition.task_def.arn
   desired_count   = 1
