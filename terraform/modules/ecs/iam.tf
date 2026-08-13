@@ -1,5 +1,5 @@
 resource "aws_iam_role" "ecs_execution_role" {
-  name = "ecsTaskExecutionRole"
+  name = "ecsTaskExecutionRole1"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -25,7 +25,7 @@ resource "aws_iam_role_policy_attachment" "ecs_execution_attach" {
 
 
 resource "aws_iam_role" "ecs_task_role" {
-  name = "ecsTaskRole"
+  name = "ecsTaskRole1"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -47,7 +47,7 @@ resource "aws_iam_role" "ecs_task_role" {
 # IAM ROLE for EC2 instance
 
 resource "aws_iam_role" "ecs_instance_role" {
-  name = "ecs-instance-role"
+  name = "ecs-instance-role1"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -79,7 +79,7 @@ resource "aws_iam_role_policy_attachment" "ecs_ecr_read" {
 
 
 resource "aws_iam_instance_profile" "ecs_profile" {
-  name = "ecs-instance-profile"
+  name = "ecs-instance-profile1"
 
   role = aws_iam_role.ecs_instance_role.name
 }
@@ -89,7 +89,7 @@ resource "aws_iam_instance_profile" "ecs_profile" {
 # from AWS Secrets Manager
 
 resource "aws_iam_role_policy" "secret_access" {
-  name = "ecs-secret-access"
+  name = "ecs-secret-access1"
 
   role = aws_iam_role.ecs_execution_role.id
 

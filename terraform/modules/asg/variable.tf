@@ -1,31 +1,31 @@
 variable "instance_type" {
-    type = string
+  type = string
 }
 
 variable "instance_profile_name" {
-    type = string
+  type = string
 }
 
 variable "backend_sg_id" {
-    type = string
+  type = string
 }
 
 variable "ecs_cluster_name" {
-    type = string
+  type = string
 }
 
 variable "private_subnets" {
-  type        = list(string)
+  type = list(string)
 }
 
 variable "min_size" {
-  type        = number
+  type = number
 }
 
 variable "max_size" {
-  type        = number
+  type = number
 }
 
 variable "desired_capacity" {
-  type        = number
+  type = number
 }

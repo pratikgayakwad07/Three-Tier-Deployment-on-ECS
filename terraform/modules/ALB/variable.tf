@@ -10,4 +10,4 @@ variable "container_port" {
   type = number
 }
 
-variable "environment"{}
+variable "environment" {}

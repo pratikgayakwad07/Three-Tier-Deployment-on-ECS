@@ -7,7 +7,7 @@ resource "aws_security_group" "rds_sg" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [var.backend_sg_id] 
+    security_groups = [var.backend_sg_id]
   }
   egress {
     from_port   = 0
@@ -18,33 +18,43 @@ resource "aws_security_group" "rds_sg" {
 }
 
 ##
-module "mysql" {
+resource "aws_db_subnet_group" "db_subnet_group" {
+  name       = "mysql-db-subnet-group"
+  subnet_ids = var.private_subnets
+}
 
-  source = "terraform-aws-modules/rds/aws"
-  version = "~> 6.9"
+resource "aws_db_instance" "mysql" {
 
-  identifier = "${var.environment}-mysql"
-  engine = "mysql"
+  engine         = "mysql"
   engine_version = var.engine_version
 
   instance_class = var.instance_class
-  allocated_storage = var.allocated_storage
+
+  allocated_storage     = var.allocated_storage
   max_allocated_storage = var.max_allocated_storage
 
-  db_name = var.db_name
-  username = var.db_username
+  db_name                     = var.db_name
+  username                    = var.db_username
+  manage_master_user_password = true
+
   port = 3306
 
-  manage_master_user_password = true
+  db_subnet_group_name   = aws_db_subnet_group.db_subnet_group.name
+  vpc_security_group_ids = [aws_security_group.rds_sg.id]
+
+  publicly_accessible = false
+
   multi_az = false
 
-  create_db_subnet_group = true
-  subnet_ids = var.private_subnets
-  vpc_security_group_ids = [ aws_security_group.rds_sg.id]
+  storage_encrypted = true
 
-  performance_insights_enabled = false
-  monitoring_interval = 0
-  publicly_accessible = false
-  skip_final_snapshot = false
+  backup_retention_period = 1
 
+  skip_final_snapshot = true
+
+  deletion_protection = false
+
+  tags = {
+    Name = "mysql-rds"
+  }
 }

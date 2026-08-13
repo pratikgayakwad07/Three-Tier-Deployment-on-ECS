@@ -26,7 +26,7 @@ resource "aws_launch_template" "ecs_launch_template" {
 #!/bin/bash
 echo ECS_CLUSTER=${var.ecs_cluster_name} >> /etc/ecs/ecs.config
 EOF
-)
+  )
 
   tag_specifications {
     resource_type = "instance"
@@ -48,11 +48,12 @@ resource "aws_autoscaling_group" "ecs_asg" {
   vpc_zone_identifier = var.private_subnets
 
   launch_template {
-  id      = aws_launch_template.ecs_launch_template.id
-  version = "$Latest"
-}
+    id      = aws_launch_template.ecs_launch_template.id
+    version = "$Latest"
+  }
 
-  health_check_type = "EC2"
+  health_check_type         = "EC2"
+  protect_from_scale_in     = true
   health_check_grace_period = 300
 
   tag {
@@ -66,7 +67,7 @@ resource "aws_autoscaling_group" "ecs_asg" {
 
 resource "aws_ecs_capacity_provider" "ecs_capacity_provider" {
 
-  name = "blog-app-capacity-provider"
+  name = "blogapp-capacity-provider"
 
   auto_scaling_group_provider {
 
@@ -80,7 +81,7 @@ resource "aws_ecs_capacity_provider" "ecs_capacity_provider" {
       maximum_scaling_step_size = 3
     }
 
-    managed_termination_protection = "DISABLED"
+    managed_termination_protection = "ENABLED"
   }
 }
 
@@ -97,5 +98,6 @@ resource "aws_ecs_cluster_capacity_providers" "cluster_capacity_provider" {
     capacity_provider = aws_ecs_capacity_provider.ecs_capacity_provider.name
 
     weight = 1
+    base   = 1
   }
 }

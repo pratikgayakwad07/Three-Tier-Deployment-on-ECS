@@ -1,4 +1,4 @@
-variable "alb_dns" {
+variable "alb_dns_name" {
   type = string
 }
 

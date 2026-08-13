@@ -1,5 +1,5 @@
 resource "aws_cloudfront_origin_access_control" "s3_oac" {
-  name                              = "s3-oac"
+  name                              = "s3-oac1"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
@@ -12,13 +12,13 @@ resource "aws_cloudfront_distribution" "cdn_distribution" {
   default_root_object = "index.html"
 
   origin {
-    domain_name = var.bucket_regional_domain_name
-    origin_id   = "s3-origin"
+    domain_name              = var.bucket_regional_domain_name
+    origin_id                = "s3-origin"
     origin_access_control_id = aws_cloudfront_origin_access_control.s3_oac.id
   }
 
   origin {
-    domain_name = var.alb_dns
+    domain_name = var.alb_dns_name
     origin_id   = "alb-origin"
 
     custom_origin_config {
@@ -47,41 +47,41 @@ resource "aws_cloudfront_distribution" "cdn_distribution" {
 
   ordered_cache_behavior {
 
-  path_pattern     = "/api/*"
-  target_origin_id = "alb-origin"
+    path_pattern     = "/api/*"
+    target_origin_id = "alb-origin"
 
-  viewer_protocol_policy = "redirect-to-https"
+    viewer_protocol_policy = "redirect-to-https"
 
-  allowed_methods = [
-    "GET",
-    "HEAD",
-    "OPTIONS",
-    "PUT",
-    "POST",
-    "PATCH",
-    "DELETE"
-  ]
+    allowed_methods = [
+      "GET",
+      "HEAD",
+      "OPTIONS",
+      "PUT",
+      "POST",
+      "PATCH",
+      "DELETE"
+    ]
 
-  cached_methods = [
-    "GET",
-    "HEAD"
-  ]
+    cached_methods = [
+      "GET",
+      "HEAD"
+    ]
 
-  forwarded_values {
+    forwarded_values {
 
-    query_string = true
+      query_string = true
 
-    headers = ["*"]
+      headers = ["*"]
 
-    cookies {
-      forward = "all"
+      cookies {
+        forward = "all"
+      }
     }
-  }
 
-  min_ttl     = 0
-  default_ttl = 0
-  max_ttl     = 0
-}
+    min_ttl     = 0
+    default_ttl = 0
+    max_ttl     = 0
+  }
 
   viewer_certificate {
     cloudfront_default_certificate = true

@@ -60,7 +60,7 @@ resource "aws_route_table" "private_rt" {
   vpc_id = aws_vpc.app_vpc.id
 }
 
-resource "aws_route" "private_nat_route" {   # seperate route is defined for conditional  nat
+resource "aws_route" "private_nat_route" { # seperate route is defined for conditional  nat
   count = var.create_nat_gateway ? 1 : 0
 
   route_table_id         = aws_route_table.private_rt.id

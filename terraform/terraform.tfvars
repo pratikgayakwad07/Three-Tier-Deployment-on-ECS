@@ -29,11 +29,11 @@ repository_name = "backend-service"
 
 
 # Frontend
-bucket_name = "UI-service-bucket-01"
+bucket_name = "uii-svc-bucket-devops0712"
 
 
 # ASG
-instance_type    = "t3.micro"
+instance_type = "t3.micro"
 
 min_size         = 1
 max_size         = 3
@@ -41,8 +41,8 @@ desired_capacity = 1
 
 
 # RDS
-db_name       = "blog_db"
-db_username   = "admin"
+db_name     = "blog_db"
+db_username = "admin"
 
 engine_version = "8.0"
 

@@ -100,7 +100,7 @@ variable "engine_version" {
 
 
 variable "instance_class" {
-  type        = string
+  type = string
 }
 
 

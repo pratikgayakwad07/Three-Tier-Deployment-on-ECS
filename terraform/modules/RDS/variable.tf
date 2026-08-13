@@ -4,7 +4,7 @@ variable "vpc_id" {
 
 variable "environment" {
   description = "Environment name"
-  type = string
+  type        = string
 }
 
 variable "private_subnets" {
