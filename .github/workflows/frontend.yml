@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'frontend/**'
+      - 'UI-service/**'
 
 env:
   AWS_REGION: us-east-1
@@ -25,7 +25,7 @@ jobs:
         node-version: 24
 
     - name: Install Dependencies
-      working-directory: frontend
+      working-directory: UI-service
       run: npm ci
 
    
