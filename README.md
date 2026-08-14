@@ -36,6 +36,7 @@ A full-stack web application built for educational purposes, demonstrating CRUD 
 2. **Database Setup**
    ```sql
    CREATE DATABASE blog_db;
+   SHOW DATABASES;
    USE blog_db;
    
    CREATE TABLE posts (
@@ -45,6 +46,8 @@ A full-stack web application built for educational purposes, demonstrating CRUD 
      author VARCHAR(100) NOT NULL,
      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
    );
+   SHOW TABLES;
+   SELECT * FROM posts;
    ```
 
 3. **Install Dependencies**
